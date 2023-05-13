@@ -46,7 +46,7 @@ library
     -- see also notes in Text.PrettyPrint.ANSI.Leijen
     build-depends: semigroups >= 0.18.5 && < 0.21
 
-  build-depends: ansi-terminal >= 0.9.1 && < 0.12
+  build-depends: ansi-terminal >= 0.9.1 && < 1.1
   build-depends: base >= 4.3 && < 5
 
   if impl(ghc >= 7.4)
