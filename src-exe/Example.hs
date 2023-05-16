@@ -4,6 +4,10 @@ import Text.PrettyPrint.ANSI.Leijen
 
 import System.IO
 
+import Prettyprinter (layoutPretty, defaultLayoutOptions)
+import Prettyprinter.Render.Terminal (renderLazy)
+import Data.Text.Lazy (unpack)
+
 
 main :: IO ()
 main = do
@@ -14,7 +18,7 @@ main = do
     hPutDoc stdout $ onblue (text "Nested" <+> ondullyellow (text "colors") <+> text "example") <> linebreak
     
     -- ...but going via a string will only preserve formatting information information on Unix
-    putStr $ show $ green (text "I will be green on Unix but uncolored on Windows") <> linebreak
+    putStr $ unpack . renderLazy . layoutPretty defaultLayoutOptions $ green (text "I will be green on Unix but uncolored on Windows") <> linebreak
     
     -- Let's see some non-color formatting:
     putDoc $ text "We can do" <+> bold (text "boldness") <> text ", if your terminal supports it, and even perhaps" <+> underline (text "underlining") <> linebreak

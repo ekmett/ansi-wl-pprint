@@ -98,16 +98,6 @@ jobs:
             compilerVersion: 7.4.2
             setup-method: hvr-ppa
             allow-failure: false
-          - compiler: ghc-7.2.2
-            compilerKind: ghc
-            compilerVersion: 7.2.2
-            setup-method: hvr-ppa
-            allow-failure: false
-          - compiler: ghc-7.0.4
-            compilerKind: ghc
-            compilerVersion: 7.0.4
-            setup-method: hvr-ppa
-            allow-failure: false
       fail-fast: false
     steps:
       - name: apt
@@ -237,6 +227,8 @@ jobs:
           if [ $((HCNUMVER >= 80200)) -ne 0 ] ; then echo "package ansi-wl-pprint" >> cabal.project ; fi
           if [ $((HCNUMVER >= 80200)) -ne 0 ] ; then echo "    ghc-options: -Werror=missing-methods" >> cabal.project ; fi
           cat >> cabal.project <<EOF
+          package ansi-wl-pprint
+            flags: +example
           EOF
           $HCPKG list --simple-output --names-only | perl -ne 'for (split /\s+/) { print "constraints: $_ installed\n" unless /^(ansi-wl-pprint)$/; }' >> cabal.project.local
           cat cabal.project
