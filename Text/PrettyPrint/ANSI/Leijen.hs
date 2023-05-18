@@ -1,4 +1,5 @@
-{-# LANGUAGE CPP #-}
+{-# LANGUAGE PackageImports #-}
+{-# LANGUAGE Trustworthy #-}
 -----------------------------------------------------------------------------
 -- |
 -- Module      :  Text.PrettyPrint.ANSI.Leijen
@@ -66,7 +67,9 @@
 -- background color and the ability to make parts of the text bold or
 -- underlined.
 -----------------------------------------------------------
-module Text.PrettyPrint.ANSI.Leijen (
+module Text.PrettyPrint.ANSI.Leijen
+  {-# DEPRECATED "Compatibility module for users of ansi-wl-pprint - use \"Prettyprinter\" instead" #-}
+  (
    -- * The algebra of pretty-printing
    -- $DocumentAlgebra
 
@@ -93,7 +96,7 @@ module Text.PrettyPrint.ANSI.Leijen (
    align, hang, indent, encloseSep, list, tupled, semiBraces,
 
    -- * Operators
-   (<+>), (Text.PrettyPrint.ANSI.Leijen.Internal.<$>), (</>), (<$$>), (<//>),
+   (<+>), (<$>), (</>), (<$$>), (<//>),
 
    -- * List combinators
    hsep, vsep, fillSep, sep, hcat, vcat, fillCat, cat, punctuate,
@@ -158,15 +161,8 @@ module Text.PrettyPrint.ANSI.Leijen (
    column, columns, nesting, width
    ) where
 
-import Text.PrettyPrint.ANSI.Leijen.Internal
-
-#if __GLASGOW_HASKELL__ >= 710
-import Data.Monoid ((<>))
-#elif __GLASGOW_HASKELL__ >= 704
-import Data.Monoid (Monoid, mappend, mconcat, mempty, (<>))
-#else
-import Data.Monoid (Monoid, mappend, mconcat, mempty)
-#endif
+import Prelude ()
+import "prettyprinter-compat-ansi-wl-pprint"  Text.PrettyPrint.ANSI.Leijen
 
 -- $DocumentAlgebra
 -- The combinators in this library satisfy many algebraic laws.
