@@ -1,3 +1,4 @@
+branches: master
 raw-project
   package ansi-wl-pprint
     flags: +example
